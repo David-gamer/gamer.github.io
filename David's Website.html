@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Moments | Mental Health & Wellness Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            opacity: 0;
+            transition: all 0.5s ease;
+            overflow-y: auto;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1499728603263-13726abce5fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .affirmation-card {
+            transition: all 0.3s ease;
+        }
+        
+        .affirmation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .confession-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-tab.active {
+            border-bottom: 3px solid #4f46e5;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        body {
+            overflow-x: hidden;
+            position: relative;
+            height: 100vh;
+        }
+        
+        .slide-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-brain text-indigo-600 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-800">Mindful Moments</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" data-target="home" class="nav-tab active text-gray-800 hover:text-indigo-600 transition">Home</a>
+                    <a href="#" data-target="affirmations" class="nav-tab text-gray-800 hover:text-indigo-600 transition">Daily Affirmations</a>
+                    <a href="#" data-target="tips" class="nav-tab text-gray-800 hover:text-indigo-600 transition">Wellness Tips</a>
+                    <a href="#" data-target="confessions" class="nav-tab text-gray-800 hover:text-indigo-600 transition">Confessions</a>
+                    <a href="#" data-target="forum" class="nav-tab text-gray-800 hover:text-indigo-600 transition">Support Forum</a>
+                    <a href="#" data-target="contact" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition">Contact Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-800 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white px-4 pt-2 pb-4">
+            <a href="#" data-target="home" class="block py-2 text-gray-800 hover:text-indigo-600 transition">Home</a>
+            <a href="#" data-target="affirmations" class="block py-2 text-gray-800 hover:text-indigo-600 transition">Daily Affirmations</a>
+            <a href="#" data-target="tips" class="block py-2 text-gray-800 hover:text-indigo-600 transition">Wellness Tips</a>
+            <a href="#" data-target="confessions" class="block py-2 text-gray-800 hover:text-indigo-600 transition">Confessions</a>
+            <a href="#" data-target="forum" class="block py-2 text-gray-800 hover:text-indigo-600 transition">Support Forum</a>
+            <a href="#" data-target="contact" class="block bg-indigo-600 text-white px-4 py-2 rounded-full text-center mt-2 hover:bg-indigo-700 transition">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Slides Container -->
+    <div class="slide-container">
+        <!-- Home Slide -->
+        <section id="home" class="slide active hero flex items-center justify-center text-white">
+            <div class="text-center px-4 fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Your Journey to Mental Wellness</h1>
+                <p class="text-xl md:text-2xl mb-8">Daily affirmations, expert tips, and a supportive community</p>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#" data-target="affirmations" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition">Today's Affirmation</a>
+                    <a href="#" data-target="confessions" class="bg-white hover:bg-gray-100 text-indigo-600 px-8 py-3 rounded-full text-lg font-semibold transition">Share Your Story</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Affirmation Slide -->
+        <section id="affirmations" class="slide py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 h-full">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Today's Affirmation</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Start your day with positive energy</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="affirmation-card bg-indigo-50 p-8 rounded-lg shadow-md">
+                        <div class="bg-indigo-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-sun text-indigo-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4 text-center text-indigo-800">Morning Affirmation</h3>
+                        <p class="text-gray-700 text-center italic mb-6">"Today, I choose to focus on what I can control and release what I cannot."</p>
+                        <div class="flex justify-center">
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-full text-sm font-semibold transition">
+                                Save to Journal
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="affirmation-card bg-indigo-50 p-8 rounded-lg shadow-md">
+                        <div class="bg-indigo-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-moon text-indigo-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4 text-center text-indigo-800">Evening Reflection</h3>
+                        <p class="text-gray-700 text-center italic mb-6">"I am proud of myself for making it through today. Tomorrow is a new opportunity."</p>
+                        <div class="flex justify-center">
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-full text-sm font-semibold transition">
+                                Save to Journal
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="affirmation-card bg-indigo-50 p-8 rounded-lg shadow-md">
+                        <div class="bg-indigo-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-heart text-indigo-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4 text-center text-indigo-800">Self-Love Reminder</h3>
+                        <p class="text-gray-700 text-center italic mb-6">"I am enough exactly as I am. My worth is not determined by my productivity."</p>
+                        <div class="flex justify-center">
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-full text-sm font-semibold transition">
+                                Save to Journal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition">View Affirmation Archive</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wellness Tips Slide -->
+        <section id="tips" class="slide py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 h-full">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Wellness Tips</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Expert advice for mental and emotional well-being</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Meditation" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="bg-indigo-100 text-indigo-600 text-xs px-2 py-1 rounded-full"><i class="fas fa-tag mr-1"></i>Mindfulness</span>
+                                <span class="text-gray-500 text-sm ml-auto">5 min read</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">The 5-Minute Meditation Routine</h3>
+                            <p class="text-gray-600 mb-4">Learn how to incorporate short meditation sessions into your busy day for immediate stress relief and long-term mental clarity.</p>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-700 font-medium flex items-center">
+                                Read More <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Sleep" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="bg-indigo-100 text-indigo-600 text-xs px-2 py-1 rounded-full"><i class="fas fa-tag mr-1"></i>Sleep</span>
+                                <span class="text-gray-500 text-sm ml-auto">7 min read</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Improving Your Sleep Hygiene</h3>
+                            <p class="text-gray-600 mb-4">Discover 10 evidence-based strategies to improve your sleep quality, which directly impacts your mental health and daily functioning.</p>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-700 font-medium flex items-center">
+                                Read More <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Exercise" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="bg-indigo-100 text-indigo-600 text-xs px-2 py-1 rounded-full"><i class="fas fa-tag mr-1"></i>Exercise</span>
+                                <span class="text-gray-500 text-sm ml-auto">8 min read</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Movement for Mental Health</h3>
+                            <p class="text-gray-600 mb-4">How physical activity can be as effective as medication for managing anxiety and depression, with practical ways to get started.</p>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-700 font-medium flex items-center">
+                                Read More <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition">View All Wellness Tips</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Anonymous Confessions Slide -->
+        <section id="confessions" class="slide py-16 bg-indigo-900 text-white">
+            <div class="max-w-7xl mx-auto px-4 h-full">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Anonymous Confessions</h2>
+                    <p class="text-indigo-200 max-w-2xl mx-auto">A safe space to share your thoughts without judgment</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="confession-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-indigo-700 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-user-secret"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Anonymous</h4>
+                                <p class="text-indigo-300 text-sm">2 days ago</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">"I've been struggling with anxiety for years but was always afraid to talk about it. Seeing others share their stories here gave me the courage to finally seek help. Thank you for this space."</p>
+                        <div class="flex items-center text-indigo-300">
+                            <button class="flex items-center mr-4 hover:text-white">
+                                <i class="fas fa-heart mr-1"></i> 24
+                            </button>
+                            <button class="flex items-center hover:text-white">
+                                <i class="fas fa-comment mr-1"></i> 5
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="confession-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-indigo-700 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-user-secret"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Anonymous</h4>
+                                <p class="text-indigo-300 text-sm">1 week ago</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">"Today marks 6 months since my last self-harm episode. It's been the hardest journey of my life, but I'm learning healthier coping mechanisms every day."</p>
+                        <div class="flex items-center text-indigo-300">
+                            <button class="flex items-center mr-4 hover:text-white">
+                                <i class="fas fa-heart mr-1"></i> 87
+                            </button>
+                            <button class="flex items-center hover:text-white">
+                                <i class="fas fa-comment mr-1"></i> 13
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="confession-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-indigo-700 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-user-secret"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Anonymous</h4>
+                                <p class="text-indigo-300 text-sm">3 days ago</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">"I put on a happy face at work every day, but inside I'm drowning in depression. I don't know how much longer I can keep this up before I break down completely."</p>
+                        <div class="flex items-center text-indigo-300">
+                            <button class="flex items-center mr-4 hover:text-white">
+                                <i class="fas fa-heart mr-1"></i> 42
+                            </button>
+                            <button class="flex items-center hover:text-white">
+                                <i class="fas fa-comment mr-1"></i> 8
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="confession-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-indigo-700 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-user-secret"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Anonymous</h4>
+                                <p class="text-indigo-300 text-sm">5 days ago</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">"After years of therapy, I finally understand that my childhood trauma doesn't define me. Healing is possible, even when it feels impossible."</p>
+                        <div class="flex items-center text-indigo-300">
+                            <button class="flex items-center mr-4 hover:text-white">
+                                <i class="fas fa-heart mr-1"></i> 65
+                            </button>
+                            <button class="flex items-center hover:text-white">
+                                <i class="fas fa-comment mr-1"></i> 11
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-indigo-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4">Share Your Story (Anonymously)</h3>
+                    <form>
+                        <textarea class="w-full px-4 py-3 bg-indigo-700 border border-indigo-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-indigo-400" rows="4" placeholder="Your confession or experience..."></textarea>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="text-indigo-300 text-sm">
+                                <i class="fas fa-info-circle mr-1"></i> All submissions are completely anonymous
+                            </div>
+                            <button type="submit" class="bg-white hover:bg-gray-100 text-indigo-600 px-6 py-2 rounded-full font-medium transition">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Forum Slide -->
+        <section id="forum" class="slide py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 h-full">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Support Forum</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Connect with others who understand what you're going through</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <h3 class="text-xl font-semibold mb-4 md:mb-0">Discussion Topics</h3>
+                        <div class="flex space-x-2">
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-full text-sm font-medium transition">
+                                <i class="fas fa-plus mr-1"></i> New Topic
+                            </button>
+                            <div class="relative">
+                                <select class="appearance-none bg-white border border-gray-300 rounded-full pl-4 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                                    <option>All Topics</option>
+                                    <option>Anxiety</option>
+                                    <option>Depression</option>
+                                    <option>Relationships</option>
+                                    <option>Self-Care</option>
+                                    <option>Recovery</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <i class="fas fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-medium text-indigo-600">Coping with panic attacks at work</h4>
+                                    <p class="text-sm text-gray-500 mb-2">Started by <span class="font-medium">HealingJourney</span> in <span class="font-medium">Anxiety</span></p>
+                                    <p class="text-gray-700">Does anyone have strategies for managing sudden panic attacks during work meetings? I need discreet techniques...</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm text-gray-500">12 replies</div>
+                                    <div class="text-sm text-gray-500">Last post: 2h ago</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-medium text-indigo-600">Medication experiences - SSRIs</h4>
+                                    <p class="text-sm text-gray-500 mb-2">Started by <span class="font-medium">NewToThis</span> in <span class="font-medium">Depression</span></p>
+                                    <p class="text-gray-700">My doctor recommended starting medication but I'm nervous about side effects. Would love to hear others' experiences...</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm text-gray-500">27 replies</div>
+                                    <div class="text-sm text-gray-500">Last post: 1d ago</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-medium text-indigo-600">Setting boundaries with toxic family</h4>
+                                    <p class="text-sm text-gray-500 mb-2">Started by <span class="font-medium">BoundarySetter</span> in <span class="font-medium">Relationships</span></p>
+                                    <p class="text-gray-700">How do you maintain boundaries without feeling guilty? My family constantly oversteps and then makes me feel bad for speaking up...</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm text-gray-500">18 replies</div>
+                                    <div class="text-sm text-gray-500">Last post: 5h ago</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-medium text-indigo-600">Small wins that helped your mental health</h4>
+                                    <p class="text-sm text-gray-500 mb-2">Started by <span class="font-medium">ProgressNotPerfection</span> in <span class="font-medium">Self-Care</span></p>
+                                    <p class="text-gray-700">Let's share the small things that made a big difference! For me, drinking water first thing in the morning helped my mood more than I expected...</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm text-gray-500">42 replies</div>
+                                    <div class="text-sm text-gray-500">Last post: 30m ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <a href="#" class="text-indigo-600 hover:text-indigo-700 font-medium">View All Discussions <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Contact Slide -->
+        <section id="contact" class="slide py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 h-full">
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">About Mindful Moments</h2>
+                        <p class="text-gray-600 mb-4">Founded by Adjei Owusu David, Mindful Moments was created to provide a safe, supportive space for individuals navigating mental health challenges. What began as a personal blog has grown into a thriving community of people supporting each other through life's ups and downs.</p>
+                        <p class="text-gray-600 mb-6">Our mission is to break the stigma around mental health by fostering open conversations, providing practical resources, and reminding everyone that they're not alone in their struggles.</p>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold mb-4">Join Our Newsletter</h3>
+                            <p class="text-gray-600 mb-4">Get weekly mental health tips, affirmations, and community updates straight to your inbox.</p>
+                            <form class="flex">
+                                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-r-lg font-medium transition">
+                                    Subscribe
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">Contact Us</h2>
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="mb-6">
+                                <div class="flex items-start mb-4">
+                                    <i class="fas fa-envelope text-indigo-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Email</h4>
+                                        <p class="text-gray-600">support@mindfulmoments.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start mb-4">
+                                    <i class="fas fa-phone-alt text-indigo-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Phone</h4>
+                                        <p class="text-gray-600">0500399159</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fab fa-instagram text-indigo-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Instagram</h4>
+                                        <p class="text-gray-600">_.game.er_</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-semibold mb-3">Send us a message</h4>
+                            <form class="space-y-4">
+                                <div>
+                                    <label for="contact-name" class="block text-gray-700 mb-1">Name</label>
+                                    <input type="text" id="contact-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label for="contact-email" class="block text-gray-700 mb-1">Email</label>
+                                    <input type="email" id="contact-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label for="contact-message" class="block text-gray-700 mb-1">Message</label>
+                                    <textarea id="contact-message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-6 rounded-lg font-medium transition">
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-brain text-indigo-500 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl">Mindful Moments</span>
+                    </div>
+                    <p class="text-gray-400">Your safe space for mental health support, daily affirmations, and community connection.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" data-target="home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" data-target="affirmations" class="text-gray-400 hover:text-white transition">Daily Affirmations</a></li>
+                        <li><a href="#" data-target="tips" class="text-gray-400 hover:text-white transition">Wellness Tips</a></li>
+                        <li><a href="#" data-target="confessions" class="text-gray-400 hover:text-white transition">Confessions</a></li>
+                        <li><a href="#" data-target="forum" class="text-gray-400 hover:text-white transition">Support Forum</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Crisis Hotlines</a></li>
+                        <li><a href="#" class="hover:text-white transition">Therapist Directory</a></li>
+                        <li><a href="#" class="hover:text-white transition">Self-Help Guides</a></li>
+                        <li><a href="#" class="hover:text-white transition">Recommended Books</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                    <div class="text-gray-400">
+                        <p class="flex items-center mb-1">
+                            <i class="fas fa-phone-alt mr-2 text-indigo-500"></i>
+                            0500399159
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-indigo-500"></i>
+                            support@mindfulmoments.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Mindful Moments. Founded by Adjei Owusu David. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Slide navigation
+        const slides = document.querySelectorAll('.slide');
+        const navLinks = document.querySelectorAll('[data-target]');
+        
+        function showSlide(target) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show target slide
+            const targetSlide = document.getElementById(target);
+            if (targetSlide) {
+                targetSlide.classList.add('active');
+            }
+            
+            // Update active nav tab
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-target') === target) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Scroll to top of the slide
+            window.scrollTo(0, 0);
+        }
+        
+        // Set up click events for navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('data-target');
+                showSlide(target);
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Initialize with home slide
+        showSlide('home');
+
+        // Confession submission
+        const confessionForm = document.querySelector('#confessions form');
+        if (confessionForm) {
+            confessionForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const textarea = this.querySelector('textarea');
+                if (textarea.value.trim() !== '') {
+                    alert('Thank you for sharing your story. Your submission is completely anonymous and will be reviewed before appearing on the site.');
+                    textarea.value = '';
+                }
+            });
+        }
+
+        // Animate elements when they come into view
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.affirmation-card, .confession-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
